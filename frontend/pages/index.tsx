@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.scss'
 import {DayBlock} from "../components/DayBlock";
 
 const Home: NextPage = () => {
+
   return (
     <div className={styles.container}>
       <DayBlock />

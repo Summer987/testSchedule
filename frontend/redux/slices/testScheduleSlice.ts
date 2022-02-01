@@ -1,50 +1,65 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-
-const initialState = {
-  data: '',
-  plan: [
+interface IPlan {
+  day: string,
+  dayNumber: number,
+  date: string,
+  active: boolean,
+  timeBreak: [
     {
-      day: 'Понедельник',
-      date: '2022-01-31',
-      active: false,
-      timeBreak: [
+      from: number,
+      to: number
+    }
+  ],
+  place: [
+    {
+      name: string,
+      time: [
         {
-          from: '14:00',
-          to: '15:00'
-        }
-      ],
-      place: [
-        {
-          name: 'Москва',
-          time: [
-            {
-              from: '09:00',
-              to: '15:00',
-            }
-          ]
+          from: number,
+          to: number,
         }
       ]
-
     },
+    {
+      name: string,
+      time: [
+        {
+          from: number,
+          to: number,
+        }
+      ]
+    }
   ]
+}
+
+interface ITestScheduleSlice {
+  plan: IPlan[]
+}
+
+
+const initialState:ITestScheduleSlice = {
+  plan: []
 };
 
 export const testScheduleSlice = createSlice({
   name: 'testScheduleSlice',
   initialState,
   reducers: {
-    setScheduleData: (state, action) => {
-      state.data = action.payload
+    setSchedulePlan: (state, action) => {
+      console.log('action')
+      console.log(action)
+      state.plan = action.payload
     },
   },
 });
 
 export const {
-  setScheduleData
+  setSchedulePlan
 } = testScheduleSlice.actions;
 
-export const selectSchedule = (state: RootState) => state.scheduleState.data;
+// export const selectSchedule = (state: RootState) => state.scheduleState.data;
+export const selectPlan = (state: RootState) => state.scheduleState.plan
 
 export const testScheduleReducer = testScheduleSlice.reducer;
