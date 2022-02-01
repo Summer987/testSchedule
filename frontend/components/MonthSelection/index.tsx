@@ -8,6 +8,7 @@ import styles from './MonthSelection.module.scss'
 import moment from "moment"
 import {setScheduleData} from "../../redux/slices/testScheduleSlice"
 import {useAppDispatch} from "../../redux/hooks";
+import {Button} from "../Button";
 
 export const MonthSelection: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -20,7 +21,7 @@ export const MonthSelection: React.FC = () => {
     dispatch(setScheduleData(String(startDate)))
   };
 
-  const handleClick = (e) => {
+  const handleClick = (e: any) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
@@ -28,9 +29,8 @@ export const MonthSelection: React.FC = () => {
   return (
     <>
       <div className={styles.button}>
-        <button onClick={handleClick}>
-          {moment(startDate).format('MMMM YYYY')}
-        </button>
+        <Button onClick={handleClick} value={moment(startDate).format('MMMM YYYY')}/>
+
         {isOpen && (
           <DatePicker
             selected={startDate}
