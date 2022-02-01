@@ -1,0 +1,29 @@
+.place {
+  padding: 20px 0;
+  margin: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:last-child) {
+    border-bottom: 0.5px solid rgba(124, 124, 124, 0.2);
+
+  }
+
+  input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+
+  .choicePlace {
+    display: flex;
+    align-items: center;
+  }
+
+  .timeBlock {
+    display: flex;
+    align-items: center;
+    //color: rgb(236,235,239);
+  }
+}

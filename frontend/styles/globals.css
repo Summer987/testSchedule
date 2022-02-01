@@ -8,7 +8,9 @@ body {
 }
 
 .react-datepicker__day--keyboard-selected,
-.react-datepicker__month-text--keyboard-selected {
+.react-datepicker__month-text--keyboard-selected,
+li.react-datepicker__time-list-item--selected
+{
   background: rgb(70,68,129) !important;
 }
 

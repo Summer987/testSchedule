@@ -4,6 +4,31 @@ import { RootState } from '../store';
 
 const initialState = {
   data: '',
+  plan: [
+    {
+      day: 'Понедельник',
+      date: '2022-01-31',
+      active: false,
+      timeBreak: [
+        {
+          from: '14:00',
+          to: '15:00'
+        }
+      ],
+      place: [
+        {
+          name: 'Москва',
+          time: [
+            {
+              from: '09:00',
+              to: '15:00',
+            }
+          ]
+        }
+      ]
+
+    },
+  ]
 };
 
 export const testScheduleSlice = createSlice({

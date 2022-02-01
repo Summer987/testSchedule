@@ -1,0 +1,14 @@
+.time {
+  margin: 0 5px;
+
+  input {
+    max-width: 55px;
+    padding: 7px;
+    border-radius: 5px;
+    border: 2px solid rgb(236,235,239);
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
