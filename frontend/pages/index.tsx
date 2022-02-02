@@ -22,8 +22,6 @@ const Home: NextPage = () => {
     }
   })
 
-  console.log('planMonth')
-  console.log(masWeek)
   const savePlan = () => {
     if (masWeek) {
       savePlanUse(masWeek)

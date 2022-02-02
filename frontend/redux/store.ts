@@ -8,6 +8,7 @@ export function makeStore() {
     reducer: {
       scheduleState: testScheduleReducer,
     },
+    // @ts-ignore
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(scheduleApi.middleware),
   });

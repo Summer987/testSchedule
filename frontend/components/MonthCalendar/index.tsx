@@ -1,7 +1,6 @@
 import React from 'react';
 
 // @ts-ignore
-
 import styles from './MonthCalendar.module.scss'
 import {useAppSelector} from "../../redux/hooks";
 import {selectPlan} from "../../redux/slices/testScheduleSlice";
@@ -23,34 +22,30 @@ export const MonthCalendar: React.VFC<IMonthCalendar> = () => {
     }
   }
 
-  console.log('newArr')
-  console.log(newMonth)
-
   return (
     <>
       <div className={styles.table}>
         <div className={styles.tableRow}>
-          {newMonth.map((day) => (
-            <div className={styles.tableCell}>
+          {newMonth.map((day,index) => (
+            <div className={styles.tableCell} key={index+day.day}>
               <div className={styles.tableCellHeader}>
                 <div>{day.cutDay}</div>
                 <div>{day.dateNumber !== 0 ? day.dateNumber : ''}</div>
               </div>
               <div className={styles.tableCellContent}>
-                {day.place.map((place) => (
+                {day.place.map((place,index) => (
                   place.active && (
-                    <>
+                    <div key={index}>
                       {place.name}
                       {place.time.map((time)=> (
                         <>
                           <p>с {moment(time.from).format('HH:mm')} до {moment(time.to).format('HH:mm')}</p>
                         </>
                       ))}
-                    </>
+                    </div>
                   )
                 ))}
                 <div>
-
                 </div>
               </div>
             </div>

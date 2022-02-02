@@ -22,7 +22,6 @@ export const ChangeTimeRange: React.FC<IChangeTimeRange> = ({timeDay,dayId,props
     dispatch(setSchedulePlanDayTime({action: 'remove',place:propsDay.name, id:dayId, from:timeFrom.valueOf(), to: timeTo.valueOf(),added: true}))
   }
 
-
   return (
     <>
       С

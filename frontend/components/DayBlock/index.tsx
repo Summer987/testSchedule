@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import styles from './DayBlock.module.scss';
 import {Toggle} from "../Toggle";

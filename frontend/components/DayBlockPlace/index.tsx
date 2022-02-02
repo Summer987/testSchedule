@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import styles from './DayBlockPlace.module.scss';
 import {IPlace, setSchedulePlanDayPlace} from "../../redux/slices/testScheduleSlice";
