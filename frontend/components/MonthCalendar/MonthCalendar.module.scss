@@ -1,0 +1,36 @@
+.table {
+  min-width: 700px;
+  width: 100%;
+  font-size: 80%;
+
+
+  .tableRow {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .tableCell {
+    padding: 5px;
+    cursor: pointer;
+    height: 16.5vh;
+    overflow: scroll;
+    border-right: 0.5px solid rgba(124, 124, 124, 0.2);
+    border-bottom: 0.5px solid rgba(124, 124, 124, 0.2);
+
+    &:hover {
+      background: rgb(236,235,239);
+    }
+
+    .tableCellHeader {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tableCellContent {
+      margin-top: 5px;
+    }
+  }
+
+}

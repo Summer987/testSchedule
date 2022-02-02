@@ -1,6 +1,11 @@
 .container {
   min-width: 450px;
   max-width: 960px;
-  padding-top: 3rem;
+  padding: 3rem 0;
   margin: 0 auto;
+}
+
+.save {
+  display: flex;
+  justify-content: right;
 }

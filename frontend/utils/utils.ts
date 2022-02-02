@@ -6,6 +6,12 @@ export const getWeekDay = (date:Date) => {
   return days[date.getDay()]
 }
 
+export const getCutWeekDay = (date:Date) => {
+  let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+
+  return days[date.getDay()]
+}
+
 export const addedCurrentMonth = (currentDate:Date,currentMonth: number) => {
   const currentYear = currentDate.getFullYear()
   const currentMaxDate = moment(currentDate).daysInMonth()
@@ -16,8 +22,10 @@ export const addedCurrentMonth = (currentDate:Date,currentMonth: number) => {
     mas.push({
       id: i,
       day: getWeekDay(newDate),
+      cutDay: getCutWeekDay(newDate),
       dayNumber: newDate.getDay(),
       date: newDate.getTime(),
+      dateNumber: newDate.getDate(),
       active: false,
       place: [
         {

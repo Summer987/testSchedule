@@ -1,13 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-// import { createWrapper } from 'next-redux-wrapper';
 
 import { testScheduleReducer } from './slices/testScheduleSlice';
+import {scheduleApi} from "../api/api";
 
 export function makeStore() {
   return configureStore({
     reducer: {
       scheduleState: testScheduleReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(scheduleApi.middleware),
   });
 }
 

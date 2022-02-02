@@ -12,7 +12,7 @@ export const Button: React.FC <IButton> = ({value,onClick,styleComp}) => {
 
   return (
     <>
-      <button className={`${styles.button} ${styleComp ? styles.contained : ''}`} onClick={onClick}>
+      <button className={`${styles.button} ${styleComp ? styles[styleComp] : ''}`} onClick={onClick}>
         {value}
       </button>
     </>

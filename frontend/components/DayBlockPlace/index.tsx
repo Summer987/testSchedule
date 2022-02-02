@@ -20,7 +20,7 @@ export const DayBlockPlace: React.FC<IDayBlockPlace> = ({dayId, propsDay}) => {
   return (
     <div className={styles.place}>
       <div className={styles.choicePlace}>
-        <input type="checkbox" checked={propsDay.active} onChange={(e) => {setCheckedPlaces(e.target.checked)}}/>
+        <input type="checkbox" checked={propsDay.active} onChange={(e) => {setCheckedPlaces(e?.target.checked)}}/>
         {propsDay.name}
       </div>
       {

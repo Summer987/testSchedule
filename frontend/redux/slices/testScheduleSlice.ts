@@ -16,10 +16,11 @@ export interface IPlace {
 export interface IPlan {
   id: number,
   day: string,
+  cutDay: string,
   dayNumber: number,
   date: number,
+  dateNumber: number,
   active: boolean,
-  timeBreak: IPlace,
   place: IPlace[]
 }
 
