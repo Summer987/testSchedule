@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   const sunday = getSunday(new Date())
   let masWeek:IPlan[] = []
 
-
   planMonth.forEach((day,index) => {
     if (monday <= day.date && day.date <= sunday) {
       masWeek.push(day)
@@ -25,7 +24,6 @@ const Home: NextPage = () => {
   const savePlan = () => {
     if (masWeek) {
       savePlanUse(masWeek)
-
     }
   }
 

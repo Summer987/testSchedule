@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import {addedNewPlace} from "../../utils/utils";
 
 export interface ITime {
   added: boolean,
@@ -44,6 +45,7 @@ export const testScheduleSlice = createSlice({
     setSchedulePlanDay : (state, action) => {
       const currentDay = state.plan.findIndex((day) => day.id === action.payload.id)
       state.plan[currentDay].active = action.payload.active
+      state.plan[currentDay].place = addedNewPlace(new Date(state.plan[currentDay].date))
     },
 
     setSchedulePlanDayPlace : (state, action) => {
@@ -57,19 +59,16 @@ export const testScheduleSlice = createSlice({
       const currentDay = state.plan.findIndex((day) => day.id === action.payload.id)
       const currentPlace = state.plan[currentDay].place.findIndex((place) => place.name === action.payload.place)
       const place = state.plan[currentDay].place[currentPlace]
+      const index = place.time.findIndex((time) => time.from == action.payload.from && time.to == action.payload.to && time.added == true)
 
-      place.time.forEach((time, index)=> {
-        if (time.from == action.payload.from &&
-          time.to == action.payload.to &&
-          time.added !== true) {
-          place.time[index] = {from: action.payload.from, to: action.payload.to, added:action.payload.added}
-          place.time.push({from: action.payload.to, to: action.payload.to, added:false})
-        } else {
-          if(action.payload.action === 'remove') {
-            place.time.splice(index, 1)
-          }
+      if (action.payload.action === 'added') {
+        if (index == -1) {
+          place.time[place.time.length-1].added = true
+          place.time.push({from: action.payload.to, to: action.payload.to + 7200000, added:false})
         }
-      })
+      } else if(action.payload.action === 'remove' && index !== -1) {
+        place.time.splice(index, 1)
+      }
     },
   },
 });

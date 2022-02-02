@@ -10,27 +10,23 @@ interface ITimeSelection {
   setTime: number
   timeChanged?: any
   minTime?: number
+  disabled?: boolean
 }
 
-export const TimeSelection: React.VFC<ITimeSelection> = ({setTime,timeChanged}) => {
-  const [startDate, setStartDate] = useState(new Date(setTime));
-
-  const changeTime = (date:Date) => {
-    setStartDate(date)
-    timeChanged(date)
-  }
+export const TimeSelection: React.VFC<ITimeSelection> = ({setTime,timeChanged,disabled}) => {
 
   return (
     <>
       <div className={styles.time}>
         <DatePicker
-          selected={startDate}
-          onChange={(date:Date) => changeTime(date)}
+          selected={setTime}
+          onChange={(date:Date) => timeChanged(date)}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
           timeCaption="Time"
           dateFormat="HH:mm"
+          disabled={disabled}
         />
       </div>
     </>

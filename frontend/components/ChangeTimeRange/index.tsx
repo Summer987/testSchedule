@@ -24,10 +24,10 @@ export const ChangeTimeRange: React.FC<IChangeTimeRange> = ({timeDay,dayId,props
 
   return (
     <>
-      С
-      <TimeSelection setTime={timeDay.from} timeChanged={setTimeFrom}/>
-      ДО
-      <TimeSelection setTime={timeDay.to} timeChanged={setTimeTo}/>
+      с
+      <TimeSelection disabled={timeDay.added} setTime={timeFrom} timeChanged={setTimeFrom}/>
+      до
+      <TimeSelection disabled={timeDay.added} setTime={timeTo} timeChanged={setTimeTo}/>
       { timeDay.added ? (
         <img height={25} src="/icons/trash.svg" alt="Logo" onClick={removeTime}/>
       ):(

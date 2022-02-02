@@ -27,7 +27,7 @@ export const DayBlockPlace: React.FC<IDayBlockPlace> = ({dayId, propsDay}) => {
         propsDay.active && (
           <div className={styles.timeBlock}>
             {propsDay.time.map((timeDay, index) => (
-              <div className={styles.timeBlockRange} key={index}>
+              <div className={styles.timeBlockRange} key={index+timeDay.to}>
                 <ChangeTimeRange dayId={dayId} propsDay={propsDay} timeDay={timeDay}/>
               </div>
               )

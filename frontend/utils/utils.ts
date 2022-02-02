@@ -27,43 +27,47 @@ export const addedCurrentMonth = (currentDate:Date,currentMonth: number) => {
       date: newDate.getTime(),
       dateNumber: newDate.getDate(),
       active: false,
-      place: [
-        {
-          name: 'В Москве',
-          active: false,
-          time: [
-            {
-              added: false,
-              from: newDate.setHours(9),
-              to: newDate.setHours(18),
-            },
-            ]
-        },
-        {
-          name: 'Студия на академической',
-          active: false,
-          time: [
-            {
-              added: false,
-              from: newDate.setHours(9),
-              to: newDate.setHours(18),
-            }]
-        },
-        {
-          name: 'Перерыв',
-          active: false,
-          time:[
-            {
-              added: false,
-              from: newDate.setHours(14),
-              to: newDate.setHours(15)
-            }]
-        }
-      ]
+      place: addedNewPlace(newDate)
     })
   }
 
   return mas
+}
+
+export const addedNewPlace = (newDate: Date) => {
+  return [
+    {
+      name: 'В Москве',
+      active: false,
+      time: [
+        {
+          added: false,
+          from: newDate.setHours(9),
+          to: newDate.setHours(18),
+        },
+      ]
+    },
+    {
+      name: 'Студия на академической',
+      active: false,
+      time: [
+        {
+          added: false,
+          from: newDate.setHours(9),
+          to: newDate.setHours(18),
+        }]
+    },
+    {
+      name: 'Перерыв',
+      active: false,
+      time:[
+        {
+          added: false,
+          from: newDate.setHours(14),
+          to: newDate.setHours(15)
+        }]
+    }
+  ]
 }
 
 export const getMonday = ( date:Date ) => {
