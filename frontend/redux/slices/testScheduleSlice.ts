@@ -1,37 +1,26 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-interface IPlan {
+export interface ITime {
+  added: boolean,
+  from: number,
+  to: number,
+}
+
+export interface IPlace {
+  name: string,
+  active: boolean,
+  time: ITime[]
+}
+
+export interface IPlan {
+  id: number,
   day: string,
   dayNumber: number,
-  date: string,
+  date: number,
   active: boolean,
-  timeBreak: [
-    {
-      from: number,
-      to: number
-    }
-  ],
-  place: [
-    {
-      name: string,
-      time: [
-        {
-          from: number,
-          to: number,
-        }
-      ]
-    },
-    {
-      name: string,
-      time: [
-        {
-          from: number,
-          to: number,
-        }
-      ]
-    }
-  ]
+  timeBreak: IPlace,
+  place: IPlace[]
 }
 
 interface ITestScheduleSlice {
@@ -48,15 +37,47 @@ export const testScheduleSlice = createSlice({
   initialState,
   reducers: {
     setSchedulePlan: (state, action) => {
-      console.log('action')
-      console.log(action)
       state.plan = action.payload
+    },
+
+    setSchedulePlanDay : (state, action) => {
+      const currentDay = state.plan.findIndex((day) => day.id === action.payload.id)
+      state.plan[currentDay].active = action.payload.active
+    },
+
+    setSchedulePlanDayPlace : (state, action) => {
+      const currentDay = state.plan.findIndex((day) => day.id === action.payload.id)
+      const currentPlace = state.plan[currentDay].place.findIndex((place) => place.name === action.payload.place)
+
+      state.plan[currentDay].place[currentPlace].active = action.payload.active
+    },
+
+    setSchedulePlanDayTime : (state, action) => {
+      const currentDay = state.plan.findIndex((day) => day.id === action.payload.id)
+      const currentPlace = state.plan[currentDay].place.findIndex((place) => place.name === action.payload.place)
+      const place = state.plan[currentDay].place[currentPlace]
+
+      place.time.forEach((time, index)=> {
+        if (time.from == action.payload.from &&
+          time.to == action.payload.to &&
+          time.added !== true) {
+          place.time[index] = {from: action.payload.from, to: action.payload.to, added:action.payload.added}
+          place.time.push({from: action.payload.to, to: action.payload.to, added:false})
+        } else {
+          if(action.payload.action === 'remove') {
+            place.time.splice(index, 1)
+          }
+        }
+      })
     },
   },
 });
 
 export const {
-  setSchedulePlan
+  setSchedulePlan,
+  setSchedulePlanDay,
+  setSchedulePlanDayPlace,
+  setSchedulePlanDayTime
 } = testScheduleSlice.actions;
 
 // export const selectSchedule = (state: RootState) => state.scheduleState.data;

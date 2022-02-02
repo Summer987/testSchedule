@@ -7,19 +7,25 @@ import "react-datepicker/dist/react-datepicker.css"
 import styles from './TimeSelection.module.scss'
 
 interface ITimeSelection {
-  setTime: number;
-  minTime?: number;
+  setTime: number
+  timeChanged?: any
+  minTime?: number
 }
 
-export const TimeSelection: React.VFC<ITimeSelection> = ({setTime}) => {
-  const [startDate, setStartDate] = useState(new Date().setTime(setTime));
+export const TimeSelection: React.VFC<ITimeSelection> = ({setTime,timeChanged}) => {
+  const [startDate, setStartDate] = useState(new Date(setTime));
+
+  const changeTime = (date:Date) => {
+    setStartDate(date)
+    timeChanged(date)
+  }
 
   return (
     <>
       <div className={styles.time}>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date:Date) => changeTime(date)}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}

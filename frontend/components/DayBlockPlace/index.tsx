@@ -1,45 +1,37 @@
 import React, {useState} from 'react';
 
 import styles from './DayBlockPlace.module.scss';
-import {TimeSelection} from "../TimeSelection";
-import Image from 'next/image'
-import Images from '/frontend/public/icons/plus.svg'
+import {IPlace, setSchedulePlanDayPlace} from "../../redux/slices/testScheduleSlice";
+import {useAppDispatch} from "../../redux/hooks";
+import { ChangeTimeRange} from "../ChangeTimeRange";
 
+interface IDayBlockPlace {
+  propsDay: IPlace,
+  dayId: number
+}
 
+export const DayBlockPlace: React.FC<IDayBlockPlace> = ({dayId, propsDay}) => {
+  const dispatch = useAppDispatch()
 
-
-export const DayBlockPlace: React.FC = () => {
-  const [checkedPlace, setCheckedPlace] = useState(false)
-
-  let k = [
-    {
-      day: 'Понедельник',
-      worked: {
-
-      }
-    }
-  ]
-
-  const q = () => {
-    console.log('ewr')
+  const setCheckedPlaces = (activePlace: boolean) => {
+    dispatch(setSchedulePlanDayPlace({id: dayId, place: propsDay.name, active: activePlace}))
   }
 
   return (
     <div className={styles.place}>
       <div className={styles.choicePlace}>
-        <input type="checkbox" onChange={(e) => {setCheckedPlace(e.target.checked)}}/>
-        В Москве
+        <input type="checkbox" checked={propsDay.active} onChange={(e) => {setCheckedPlaces(e.target.checked)}}/>
+        {propsDay.name}
       </div>
       {
-        checkedPlace && (
+        propsDay.active && (
           <div className={styles.timeBlock}>
-            С
-            <TimeSelection setTime={21600000}/>
-            ДО
-            <TimeSelection setTime={54000000}/>
-            <img height={25} src="/icons/plus.svg" alt="Logo" onClick={q}/>
-            <img height={25} src="/icons/trash.svg" alt="Logo" onClick={q}/>
-
+            {propsDay.time.map((timeDay, index) => (
+              <div className={styles.timeBlockRange} key={index}>
+                <ChangeTimeRange dayId={dayId} propsDay={propsDay} timeDay={timeDay}/>
+              </div>
+              )
+            )}
           </div>
         )
       }

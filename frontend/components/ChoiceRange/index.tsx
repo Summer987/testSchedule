@@ -16,11 +16,6 @@ export const ChoiceRange: React.FC = () => {
 
   }
 
-  const menu = [
-    { text: 'Неделя', path: '/week' },
-    { text: 'Месяц', path: '/month' },
-  ];
-
   return (
     <div className={styles.menu}>
       <Link href='/'>
@@ -38,7 +33,7 @@ export const ChoiceRange: React.FC = () => {
           <Button
             styleComp={router.asPath === '/month' ? 'contained' : ''}
             value={'Месяц'}
-            onClick={choiceWeek}>
+            onClick={choiceMonth}>
           </Button>
         </a>
       </Link>

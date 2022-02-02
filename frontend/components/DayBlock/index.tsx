@@ -3,23 +3,33 @@ import React, {useState} from 'react';
 import styles from './DayBlock.module.scss';
 import {Toggle} from "../Toggle";
 import {DayBlockPlace} from "../DayBlockPlace";
+import {IPlan, setSchedulePlanDay} from "../../redux/slices/testScheduleSlice";
+import {useAppDispatch} from "../../redux/hooks";
 
-export const DayBlock: React.FC = () => {
-  const [selectDay, setSelectDay] = useState(false)
+interface IDayBlock {
+  propsDay: IPlan
+}
+
+export const DayBlock: React.FC<IDayBlock> = ({propsDay}) => {
+  const dispatch = useAppDispatch()
+
+  const setSelectDays = (activeDay:boolean) => {
+    dispatch(setSchedulePlanDay({id: propsDay.id, active:activeDay}))
+  }
 
   return (
     <div className={styles.oneDay}>
       <div className={styles.oneDayHeader}>
-        <p>Понедельник</p>
-        <Toggle onChange={setSelectDay}/>
+        <p>{propsDay.day}</p>
+        <Toggle active={propsDay.active} onChange={setSelectDays}/>
       </div>
 
-      {selectDay && (
-
+      {propsDay.active && (
         <div className={styles.main}>
-          <DayBlockPlace />
-          <DayBlockPlace />
-          <DayBlockPlace />
+          {propsDay.place.map((place,index) => (
+            <DayBlockPlace dayId={propsDay.id} propsDay={place} key={index}/>
+          ))
+          }
         </div>
       )}
     </div>
